@@ -1,0 +1,8 @@
+.error{
+	width: 800px;
+	height: 60px;
+	background-color: red;
+	border: 1px;
+	border-color: grey;
+	margin: auto;
+}

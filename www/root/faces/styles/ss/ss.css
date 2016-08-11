@@ -1,0 +1,559 @@
+body{
+background-color: #EDEDED;
+margin-top: 0px;
+}
+.fieldSite{
+background-color: #696969;
+margin-top: 0px;
+margin: auto;
+width: 900px;
+/*height: auto;*/
+/*height: 1000px;*/
+}
+/*Заголовок сторінки*/
+.headSite{
+	margin: auto;
+}
+/*головне меню*/
+.navigation{
+	width: 900px;	
+	height: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	/*background-color: red;*/
+
+}
+/**/
+.showAll{
+	width: 30px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.showAll a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.showAll a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;	
+}
+/**/
+.showIcons{
+	width: 85px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.showIcons a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.showIcons a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}
+/**/
+.showAudios{
+	width: 55px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.showAudios a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.showAudios a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}
+/**/
+.showVideos{
+	width: 40px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.showVideos a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.showVideos a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}
+/**/
+.addMedia{
+	width: 90px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.addMedia a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.addMedia a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}
+/**/
+.info{
+	width: 55px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.info a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.info a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}
+/**/
+.registraion{
+	width: 75px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.registraion a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.registraion a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}
+/**/
+.authorization{
+	width: 85px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.authorization a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.authorization a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}
+/**/
+.unAuthorization{
+	width: 50px;
+	height: 20px;
+	background-color: #E8E8E8;
+	border-radius: 5px;
+	float: left;
+	margin-left: 5px;
+}
+.unAuthorization a{
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	color: gray;
+}
+.unAuthorization a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 5px;
+}
+/*Відображення зареєстрованого імені користувача та його статусу*/
+.announce{
+	/*background-color: red;*/
+  
+  width: 150px;
+  height: 40px;
+  margin-left: 5px;
+  margin-top: -10px;
+  float: left;
+}
+.announceUsername{
+    background-color: yellow;
+    opacity: 0.9;
+    color: blue;
+    width: 115px;
+    height: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 20px;
+    padding-left: 35px;
+  
+}
+.announceStatus{
+    background-color: blue;
+    opacity: 0.9;
+    color: yellow;
+    width: 140px;
+    height: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 10px;
+    padding-left: 10px;
+}
+
+/* загальний пошук всього */
+.search{
+	width: 200px;
+	height: 20px;
+	margin-right: 5px;
+	float: right;
+}
+.searchText {
+width: 145px;
+height: 15px;
+border-radius: 6px;
+}
+.searchSubmit{
+	width: 50px;
+	height: 20px;
+	border-radius: 6px;
+	float: right;
+} 
+/*Блок тем/заголовків, контенту, користувачів*/
+/*.backGroundForThree{
+	background-color: red;
+	width: 900px;
+	min-height:400px;
+  height:auto;
+}*/
+/*Блок тем та заголовків*/
+.themesBlock{
+	background-color: DarkGrey;
+	width: 180px;
+	float: left;
+	margin: auto;
+}
+/*Оформлення тем*/
+.generalThemesHeaders{
+	width: 180px;
+	text-decoration: none;
+
+}
+
+.nameThemesA{
+	text-decoration: none;
+}
+.nameThemes{
+	width: 176px;
+	margin-bottom: 1px;
+	text-decoration: none;
+	background-color: silver;
+	border-radius: 6px;
+	color: gray;
+	padding-left: 4px;
+}
+
+.nameThemes:hover{
+		background-color: white;
+		color: black;
+}
+
+/*Оформлення заголовкiв*/
+.nameHeadersA{
+text-decoration: none
+}
+
+.nameHeaders{
+	width: 171px;
+	margin-left: 5px;
+	margin-bottom: 1px;
+	background-color: #E8E8E8;
+	border-radius: 6px;
+	color: gray;
+	padding-left: 4px;
+	
+}
+.nameHeaders:hover{
+		background-color: white;
+		color: black;
+}
+
+
+/*стиль контенту*/
+.submit{
+	color: #EAEAEA;
+	background-color: #707070;
+	border-radius: 3px;
+	box-shadow: 1mm 1mm #C6C6C6;
+}
+.submit:hover{
+	color: black;
+}
+.icons{
+	width: 350px;
+	height: 100px;
+	background-color: #EDEDED;
+}
+
+.audios{
+	display: none;
+	width: 350px;
+	height: 100px;
+	margin-top: -100px;
+	margin-left: 355px;
+	/*border: solid;*/
+	background-color: #EDEDED;
+}
+
+.videos{
+	display: none;
+	width: 350px;
+	height: 100px;
+	margin-top: -100px;
+	margin-left: 710px;
+	/*border: solid;*/
+	background-color: #EDEDED;
+}
+
+.fromDb{
+	margin-top: 100px;
+	margin-left: 0px;
+	width: 600px;
+
+}
+.myNav{
+	background-color: SlateGray;
+	margin: auto;
+	float: left;
+	width: 900px;
+	
+}
+.middleBlock{
+	background-color: DarkSlateGray;
+	width: 600px;
+	height: auto;
+	float: left;
+}
+/*Блок контейнерів для виведення даних*/
+.generalBlock{
+	background-color: black;
+ 	margin: auto;
+	margin-bottom: 10px;
+	width: 600px;
+
+	
+}
+
+.headBlock{
+	background-color: magenta;
+	margin: auto;
+	width: 590px;
+}
+
+.headersOfPublications{
+    background-color: red;
+    width: 590px;
+    height: 20px;
+    padding-top: 5px;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-style: normal
+	
+}
+
+.dateBlock{
+	background-color: maroon;
+	width:140px;
+	height: 20;
+	float: left;
+
+}
+.themaBlock{
+	background-color: green;
+	width:140px;
+	height: 20;
+	float: left; 
+}
+.publishedBy{
+	background-color: lightblue;
+	width: 150px;
+	float: left;
+}
+
+/*блок редагування даних*/
+.operationBlock{
+	background-color: magenta;
+	
+	width:100px;
+	height: 20;
+	float: left;
+}
+.operationBlock a{
+	text-decoration: none;
+}
+/*редагування*/
+.operationBlockEdit{
+	width:50px;
+	height: 20;
+	float: left;
+}
+/*/редагування*/
+/*приховування-показування*/
+.operationBlockForHideShow{
+	width:50px;
+	height: 20;
+	float: left;
+}
+/*/приховування-показування*/
+/*видалення*/
+.operationBlockRemove{
+	width:50px;
+	height: 20;
+	float: left;
+}
+/*/видалення*/
+/*/блок редагування даних*/
+
+.mediaDataBlock{
+	background-color: grey;
+	width: 590;
+}
+.audioPlayer{
+	margin-left: 40px;
+}
+.videoPlayer{
+	width: 560px;
+	height: 320px;
+	margin-left: 22px;
+}
+.icons{
+	width: 560px;
+	height: 320px;
+	margin-left: 22px;
+}
+.commentsBlock{
+	background-color: yellow;
+	width: 590;
+	margin: auto;
+}
+
+/*блок користувачів*/
+.usersListBlock{
+	background-color: DarkGrey;
+	width: 120px;
+	/*height: 100px;*/
+	float: left;
+}
+/*Настройка вигляду панелы користувачів*/
+ 
+.linksForUserData{
+border-radius: 6px;
+	width: 120px;
+	height: 40px;
+}
+.usersButton{
+	width: 120px;
+	height: 40px;
+	background-color: silver; 	
+	margin-top: 2px;
+	
+}
+.usersButton:hover{
+background-color: white;
+color: grey
+}
+.userLogoIcon img{
+width: 40px;
+height: 40px;
+border-radius: 6px;
+}
+.login{
+width: 80px;
+height: 20px;
+float: right;
+margin-top: -45px;
+}
+
+.linksForUserLogin{
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: grey;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 15px;
+}
+.linksForUserLogin:hover{
+	color: #3b1b48;
+}
+
+.linksForUserStatus {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #5d5c48;
+    font-family: monospace;
+    font-size: 14px;
+}
+.linksForUserStatus:hover{
+	color: #3e3b11;
+}
+
+
+.status{
+width: 80px;
+height: 20px;
+float: right;
+margin-top: -25px;	
+}
+
+legend{
+	margin: auto;
+	background-color: lightgreen;
+}
+label{
+		margin: auto;
+	background-color: lightgreen;
+}
+/*низ сайту*/
+/*.footer{
+width: 900px;
+background-color: green;
+position: absolute;
+margin-bottom: 0px;
+}*/
