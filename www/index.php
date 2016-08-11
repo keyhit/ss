@@ -609,7 +609,7 @@ if (isset($_POST['regNewUser']) and $_POST['regNewUser'] == 'registration'
 }
 // else{
 // 	$error = "Потрібно ввести дані для реєстрації";
-// 	include "$errorMassage";
+// 	include "$errorMessage";
 // }
 // /Виконуємо реєстрацію нового користувача
 
