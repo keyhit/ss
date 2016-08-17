@@ -1,9 +1,9 @@
 <?php
 
-$usersDataDir   = $_SERVER['DOCUMENT_ROOT']."/root/usersData/";
+$usersDataDir		= $_SERVER['DOCUMENT_ROOT']."/root/usersData/";
 $defIndPhp 			= $_SERVER['DOCUMENT_ROOT']."/root/usersData/index.php";
-$classesDir     = $_SERVER['DOCUMENT_ROOT']."/root/controllers/classes/";
-$objectsDir 		= $_SERVER['DOCUMENT_ROOT']."/root/controllers/objects/";
+$classesDir			= $_SERVER['DOCUMENT_ROOT']."/root/controllers/classes/";
+$objectsDir			= $_SERVER['DOCUMENT_ROOT']."/root/controllers/objects/";
 $sfs						= $_SERVER['DOCUMENT_ROOT']."/root/controllers/dbConnections/db.inc.php";
 
 // CEI //
