@@ -1,9 +1,10 @@
 <?php 
 
-//linksAggregator 
-include 'linksAggregator.php';
-// /linksAggregator
+//////////////////////////////////////////////////////
 
+
+
+//phpinfo();
 
 function userIsLoggedIn()
 {
@@ -93,7 +94,9 @@ function databaseContainsAuthor($usernameExists, $passwordExists)
   
 
 }   
-
+//links 
+include $_SERVER['DOCUMENT_ROOT'].'/root/links/links.php';
+// /links
 //////////////////////////////
 
 //Вибираємо всі  теми з бази даних

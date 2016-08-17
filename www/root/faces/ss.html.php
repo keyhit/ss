@@ -105,8 +105,8 @@
 
 <?php if ($themes[0] <  '0' ): ?>
 <?php
-	$error = 'Теми та заголовки відсутні. <br> Створіть їх!';
-	include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';
+	$inform = 'Теми та заголовки відсутні. <br> Створіть їх!';
+	include $informMessage;
 ?>
 <?php else: ?>
 
@@ -268,7 +268,7 @@ foreach ($themes as $theme) {
 <?php endforeach; ?>
 <?php else: ?>
 <?php 	$error = 'Дані  згідно Вашого запиту відсутні!!!! ';
-	include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';?>
+	include $errorMessage ;?>
 	<?php endif; ?>
 </div>
 

@@ -11,14 +11,25 @@ class WriteNewUser{
 	public $secretQuestion;
 	public $secretAnswerQuestion;
 	public $realEmail;
-
+	public $usersDataDir;
+	public $defIndPhp;
+	public $informMessage;
+	public $errorMessage;
+	public $cautionMessage;
+	public $sfs;
 
 public function __construct($CusernameNew ='', 
 														$CpasswordNew ='', 
 														$CpasswordNewRetype ='',
 														$CsecretQuestion ='',
 														$CsecretAnswerQuestion ='',
-														$CrealEmail =''){
+														$CrealEmail ='',
+														$CusersDataDir ='',
+														$CdefIndexPhp ='',
+														$CinformMessage ='',
+														$CerrorMessage = '',
+														$CcautionMessage ='',
+														$Csfs =''){
  	
  	$this->usernameNew					= $CusernameNew; 
 	$this->passwordNew 					= $CpasswordNew;
@@ -26,36 +37,45 @@ public function __construct($CusernameNew ='',
 	$this->secretQuestion 			= $CsecretQuestion;
 	$this->secretAnswerQuestion	=	$CsecretAnswerQuestion;
 	$this->realEmail						= $CrealEmail;
+	$this->usersDataDir				  = $CusersDataDir;
+	$this->defIndPhp						= $CdefIndexPhp;
+	$this->informMessage        = $CinformMessage;
+	$this->errorMessage         = $CerrorMessage;
+	$this->cautionMessage       = $CcautionMessage;
+	$this->sfs                  = $Csfs;
 }
 	
 	public function comparisonUsersNames()
 	{
-		include 'root/controllers/dbConnections/db.inc.php';
+		
+		include $this->sfs;
   	try
 		{
-		   $sql = 'SELECT login FROM users WHERE 
+		   $sqlComp = 'SELECT login FROM users WHERE 
 					login = :login';
-		  $s = $pdo->prepare($sql);
-		  $s->bindValue(':login', $this->usernameNew);
-		  $s->execute();
+		  $sComp = $pdo->prepare($sqlComp);
+		  $sComp->bindValue(':login', $this->usernameNew);
+		  $sComp->execute();
 		  }
 		  catch(PDOException $e)
 		  {
-		   $error = 'Помилка при пошуку автора';
-		   include 'errors/error.html.php';
+		   $error = 'Помилка при пошуку автора'. $e->getMessage();
+		   $this->errorMessage;
 		   exit();
 		 }
-		   $row = $s->fetch();
-		 print_r($row);
+		   $row = $sComp->fetch();
+		 //print_r($row);
 
 		 if ($row[0] == '')
 		 {
-		 	echo "Такого користувача в базі немає і він буде доданий!";
+		 	$inform = "Такого користувача в базі немає і він буде доданий!";
+		 	$this->informMessage;
 		  return FALSE;
 		 }
 		 else
 		 {
-		 	echo "В базі вже є такий користувач!";
+		 	$inform = "В базі вже є такий користувач!";
+		 	$this->informMessage;
 		  return TRUE;
 		 }
 	}
@@ -69,7 +89,7 @@ public function __construct($CusernameNew ='',
 
 	public function insertUserInDb(){
 
-	include 'root/controllers/dbConnections/db.inc.php';
+ 	include $this->sfs;
 
 			try{
 				$sql = 'INSERT INTO users SET
@@ -92,38 +112,50 @@ public function __construct($CusernameNew ='',
 				}
 			catch (PDOException $e) {
 				$error = 'Помилка додавання в бд.'. $e->getMessage();
-				include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';
+				$this->errorMessage;;
 				exit();	
 				}
 	}
 
 public function makeDirsForNewUser(){
-	if ($userDir = mkdir($usersDataDir.$this->usernameNew, 0644, TRUE)){
 
-		$newIndexPhpInUserDir = copy($usersDataDir."index.php", $usersDataDir.$this->usernameNew."/index.php");
-		
-		echo "<br>Корінний каталог для файлів користувача ".$this->usernameNew." створений!";
+	// Створення каталогів користувачів на сервері.	 
+ 	if($userDir = mkdir($this->usersDataDir.$this->usernameNew, 0644, TRUE) and	
+ 		$newIndexPhpInUserDir = copy($this->defIndPhp, $this->usersDataDir.$this->usernameNew."/index.php")){
+	 	$inform = "<br>Корінний каталог для файлів користувача ".$this->usernameNew." створений!";
+	  include $this->informMessage;
 	}
 
-	if($userDirIcons = mkdir($_SERVER['DOCUMENT_ROOT'].$usersDataDir.$this->usernameNew."/icons", 0644, TRUE)){
-
-		$newIndexPhpInUserDir = copy($usersDataDir."index.php", "root/usersData/".$this->usernameNew."/icons/index.php");
-
-		echo "<br>Каталог для файлів зображень користувача ".$this->usernameNew." створений!";
+ 	if($userDirIcons = mkdir($this->usersDataDir.$this->usernameNew."/icons", 0644, TRUE) and
+ 		$newIndexPhpInUserDir = copy($this->defIndPhp, $this->usersDataDir.$this->usernameNew."/icons/index.php")){
+		$inform = "<br>Каталог для файлів зображень користувача ".$this->usernameNew." створений!";
+		include $this->informMessage;
 	}
 
-	if($userDirVideos = mkdir($_SERVER['DOCUMENT_ROOT'].$usersDataDir.$this->usernameNew."/videos", 0644, TRUE)){
-
-		$newIndexPhpInUserDir = copy($usersDataDir."index.php", $usersDataDir.$this->usernameNew."/videos/index.php");
-
-		echo "<br>Каталог для відео файлів користувача ".$this->usernameNew." створений!";
+ 	if($userDirIcons = mkdir($this->usersDataDir.$this->usernameNew."/videos", 0644, TRUE) and
+ 		$newIndexPhpInUserDir = copy($this->defIndPhp, $this->usersDataDir.$this->usernameNew."/videos/index.php")){
+		$inform = "<br>Каталог для файлів відео користувача ".$this->usernameNew." створений!";
+		include $this->informMessage;	
+	}
+ 	
+ 	if($userDirIcons = mkdir($this->usersDataDir.$this->usernameNew."/audios", 0644, TRUE) and
+ 		$newIndexPhpInUserDir = copy($this->defIndPhp, $this->usersDataDir.$this->usernameNew."/audios/index.php")){
+		$inform = "<br>Каталог для файлів аудіо користувача ".$this->usernameNew." створений!";
+		include $this->informMessage;
 	}
 
-	if ($userDirAudios = mkdir($_SERVER['DOCUMENT_ROOT'].$usersDataDir.$this->usernameNew."/audios", 0644, TRUE)){
-
-		$newIndexPhpInUserDir = copy($usersDataDir."index.php", $usersDataDir.$this->usernameNew."/audios/index.php");
-
-		echo "<br>Каталог для аудіо файлів користувача ".$this->usernameNew." створений!";
+ 	if($userDirIcons = mkdir($this->usersDataDir.$this->usernameNew."/person", 0644, TRUE) and
+ 		$newIndexPhpInUserDir = copy($this->defIndPhp, $this->usersDataDir.$this->usernameNew."/person/index.php")){
+		$inform = "<br>Каталог для файлів персоналізації користувача ".$this->usernameNew." створений!";
+		include $this->informMessage;
 	}
  }
 }
+
+
+
+
+
+
+
+

@@ -1,11 +1,21 @@
 <?php
+// // Файл шляхів. 	
+ include $_SERVER['DOCUMENT_ROOT']."/root/links/links.php";
 
 $reger = new WriteNewUser($_POST['usernameNew'],
 												$_POST['passwordNew'],
 												$_POST['passwordNewRetype'],
 												$_POST['secretQuestion'],
 												$_POST['secretAnswerQuestion'],
-												$_POST['realEmail']);
+												$_POST['realEmail'],
+												$usersDataDir,
+												$defIndPhp,
+												$informMessage,
+												$errorMessage,
+												$cautionMessage,
+												$sfs);
+$reger -> makeDirsForNewUser();
+
 if($reger -> comparisonUsersNames() == FALSE){
 
 		if ($reger -> comparisonTwoPasss() ==TRUE) {
@@ -24,6 +34,6 @@ if($reger -> comparisonUsersNames() == FALSE){
 else{
 	echo 'Користувач існує!';
 	include 'faces/forms/registrationForm.html.php';
-	// header('Location: .');
-	// exit();
+	header('Location: .');
+	exit();
 }
