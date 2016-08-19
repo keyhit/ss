@@ -1,8 +1,9 @@
 <?php
 
 class filesaver{
-	const USERSDATA = "root/UsersData/";
-	const 
+	const USERSDATADIR = "root/UsersData/";
+	const CURDATETIME ="date('YMd_H-i-s')";
+	const DATEFORDB = "date('d:m:y H:i')";
 	public $username;
 	public $name;
 	public $selectName;
@@ -20,6 +21,12 @@ class filesaver{
 	
 
 	public function collector(){
+		
+		include $_SERVER['DOCUMENT_ROOT'].'/root/links/links.php';
+
+		$pathToDir =  self::USERSDATADIR.$this->username."/"."$targetDir";
+		$fileNaming = self::CURDATETIME."_".$_SERVER['REMOTE_ADDR']."$extension";
+
 		//icons розширення файлів зображень
 		if (preg_match('/^(image)+\/+(jpe?g)+$/i', $this->type )){
 		$extension = ".jpeg";
@@ -47,21 +54,28 @@ class filesaver{
 		$extension = ".mp3";
 		$targetDir = 'audios/';
 		}
-		if (preg_match('/^(audio)+\/+(wav|x-wav)+$/i', $this->type )){
-		$extension = ".wav";
-		$targetDir = 'audios/';
-		}
+		// if (preg_match('/^(audio)+\/+(wav|x-wav)+$/i', $this->type )){
+		// $extension = ".wav";
+		// $targetDir = 'audios/';
+		// }
 	
-		$tmp_name = $this->tmp_name;
-		$pathToDir =  self::USERSDATA.$this->username."/"."$targetDir";
-		$curDateTime = date('YMd_H-i-s');
-		$dateForDb = date('d:m:y H:i');
-		$ip ="_". $_SERVER['REMOTE_ADDR'];
-		$fileNaming = "$curDateTime$ip$extension";
+		switch ($extension) {
+			case preg_match('/^(audio)+\/+(wav|x-wav)+$/i', $this->type ):
+				$extension = ".wav";
+				$targetDir = 'audios/';
+				break;
+			
+			default:
+				# code...
+				break;
+		}
+
+
+
 
 		if (isset($this->selectName) and $this->selectName == $this->newNameSwitch){
 
-			$fileNamingForDb = "$this->nameForUpdate$extension";
+			$fileNamingForDb = $this->nameForUpdate."$extension";
 		}
 		elseif(isset($this->selectName) and $this->selectName == $this->oldNameSwitch){
 			$fileNamingForDb = $this->name;
@@ -74,7 +88,7 @@ class filesaver{
 		if (preg_match('/^[a-zA-Z]+\/+(jpe?g|gif|png|mpeg|mp4|mp3|mpeg3|x-mpeg-3|mpeg|x-mpeg|wav|x-wav|wave)+$/i', $this->type)){
 
 // Записуємо файл у каталог на сервері під унікальним іменем
-		$savingFile = move_uploaded_file($tmp_name, $pathToFile);
+		$savingFile = move_uploaded_file($this->tmp_name, $pathToFile);
 
 		if (isset($savingFile)){
 		echo 'Файл збережено успішно!<br>';
@@ -99,7 +113,7 @@ class filesaver{
 					$s -> bindValue(':fileNamingForDb', $fileNamingForDb);
 					$s -> bindValue(':mimeType',        $this->type);
 					$s -> bindValue(':comments',        $this->comments);
-					$s -> bindValue(':fileUPDate',      $dateForDb);
+					$s -> bindValue(':fileUPDate',      self::DATEFORDB);
 					$s -> bindValue(':userId',          $this->curentUserId);
 					$s -> bindValue(':headersId',       $this->resivedHeadersId);
 					$s -> bindValue(':themesId',        $this->themesId);
@@ -107,20 +121,20 @@ class filesaver{
 				}
 			catch (PDOException $e) {
 				$error = 'Помилка додавання в бд.'. $e->getMessage();
-				include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';
+				include "$errorMessage";
 				exit();	
 				}
 		}
 		else{ 
 		$error = 'Помилка при зберіганні файлу';
-		include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';
+		include "$errorMessage";
 		exit();
 		}
 		}
 
 		else{
 			$error = 'Завантажте файл jpeg, gif, png, mp4, mp3, wav формату! ';
-			include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';
+			include "$errorMessage";
 			exit();
 
 		}

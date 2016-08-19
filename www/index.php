@@ -277,7 +277,7 @@ else{
 
 //////////////////////////////
 //////////////////////////////////////////////////////opopopopop/
-include "objects"."NewFilesaver.fsaver.obj.php";	
+include "$objectsDir"."NewFilesaver.fsaver.obj.php";	
 
 
 
