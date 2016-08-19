@@ -371,8 +371,7 @@ if (isset($_POST['regNewUser']) and $_POST['regNewUser'] == 'registration'
 	and $_POST['secretQuestion'] !==''
 	and $_POST['secretAnswerQuestion'] !==''
 	and $_POST['realEmail'] !=='') {
-	include $classesDir."WriteNewUser.class.php";
-	include $objectsDir."NewWriteNewUser.reger.php";
+	include $objectsDir."NewWriteNewUser.reger.obj.php";
 }
 // else{
 // 	$error = "Потрібно ввести дані для реєстрації";

@@ -1,7 +1,7 @@
 <?php
 // // Файл шляхів. 	
  include $_SERVER['DOCUMENT_ROOT']."/root/links/links.php";
-
+include $classesDir."WriteNewUser.class.php";
 $reger = new WriteNewUser($_POST['usernameNew'],
 												$_POST['passwordNew'],
 												$_POST['passwordNewRetype'],
