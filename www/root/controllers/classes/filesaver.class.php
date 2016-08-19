@@ -2,8 +2,6 @@
 
 class filesaver{
 	const USERSDATADIR = "root/UsersData/";
-	const CURDATETIME ="date('YMd_H-i-s')";
-	const DATEFORDB = "date('d:m:y H:i')";
 	public $username;
 	public $name;
 	public $selectName;
@@ -24,10 +22,7 @@ class filesaver{
 		
 		include $_SERVER['DOCUMENT_ROOT'].'/root/links/links.php';
 
-		$pathToDir =  self::USERSDATADIR.$this->username."/"."$targetDir";
-		$fileNaming = self::CURDATETIME."_".$_SERVER['REMOTE_ADDR']."$extension";
-
-		//icons розширення файлів зображень
+				//icons розширення файлів зображень
 		if (preg_match('/^(image)+\/+(jpe?g)+$/i', $this->type )){
 		$extension = ".jpeg";
 		$targetDir = 'icons/';
@@ -54,22 +49,13 @@ class filesaver{
 		$extension = ".mp3";
 		$targetDir = 'audios/';
 		}
-		// if (preg_match('/^(audio)+\/+(wav|x-wav)+$/i', $this->type )){
-		// $extension = ".wav";
-		// $targetDir = 'audios/';
-		// }
-	
-		switch ($extension) {
-			case preg_match('/^(audio)+\/+(wav|x-wav)+$/i', $this->type ):
-				$extension = ".wav";
-				$targetDir = 'audios/';
-				break;
-			
-			default:
-				# code...
-				break;
+		if (preg_match('/^(audio)+\/+(wav|x-wav)+$/i', $this->type )){
+		$extension = ".wav";
+		$targetDir = 'audios/';
 		}
 
+   $pathToDir =  self::USERSDATADIR.$this->username."/"."$targetDir";
+		$fileNaming = date('YMd_H-i-s')."_".$_SERVER['REMOTE_ADDR']."$extension";
 
 
 
@@ -113,7 +99,7 @@ class filesaver{
 					$s -> bindValue(':fileNamingForDb', $fileNamingForDb);
 					$s -> bindValue(':mimeType',        $this->type);
 					$s -> bindValue(':comments',        $this->comments);
-					$s -> bindValue(':fileUPDate',      self::DATEFORDB);
+					$s -> bindValue(':fileUPDate',      date('d:m:y H:i'));
 					$s -> bindValue(':userId',          $this->curentUserId);
 					$s -> bindValue(':headersId',       $this->resivedHeadersId);
 					$s -> bindValue(':themesId',        $this->themesId);
