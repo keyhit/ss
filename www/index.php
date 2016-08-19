@@ -1,103 +1,11 @@
 <?php 
-
-//////////////////////////////////////////////////////
-
-
-
-//phpinfo();
-
-function userIsLoggedIn()
-{
-  if (isset($_POST['authentification']) and $_POST['authentification'] == 'logInUser')
-  {
-    if (!isset($_POST['usernameExists']) or $_POST['usernameExists'] == '' or
-      !isset($_POST['passwordExists']) or $_POST['passwordExists'] == '')
-    {
-      $GLOBALS['loginError'] = 'Будь-ласка, заповніть обидва поля';
-      return FALSE;
-    }
-
-    //$passwordExists = md5($_POST['passwordExists'] . 'ijdb');
-
-			$passwordExists = $_POST['passwordExists'];
-
-    if(databaseContainsAuthor($_POST['usernameExists'], $passwordExists))
-    {
-      session_start();
-      $_SESSION['loggedIn'] = TRUE;
-      $_SESSION['usernameExists'] = $_POST['usernameExists'];
-      $_SESSION['passwordExists'] = $passwordExists;
-      return TRUE; 
-    }
-    else
-    {
-     session_start();
-     unset($_SESSION['loggedIn'] );
-     unset($_SESSION['usernameExists']);
-     unset($_SESSION['passwordExists']);
-     $GLOBALS['loginError'] =
-      'Вказана неправильна адреса електронної пошти або пароль.';
-    return FALSE;
-    }
-}    
-  if(isset($_GET['unAuthorization']) and $_GET['unAuthorization'] == 'loggedOut' )
-  {
-    session_start();
-    unset($_SESSION['loggedIn'] );
-    unset($_SESSION['usernameExists']);
-    unset($_SESSION['passwordExists']);
-    header('location:'.$_GET['goToHome']);
-    exit();
-  }
-  
-  session_start();
-  if(isset($_SESSION['loggedIn']))
-  {
-    return databaseContainsAuthor($_SESSION['usernameExists'],  $_SESSION['passwordExists']);
-  }
-}        
- userIsLoggedIn();
-
-function databaseContainsAuthor($usernameExists, $passwordExists)
-  {
-      
-   include 'db.inc.php';
-    
-  try
-  {
-     $sql = 'SELECT id, login, pass FROM users WHERE 
-				login = :login
-				AND 
- 	 			pass = :pass';
-    $s = $pdo->prepare($sql);
-    $s->bindValue(':login', $usernameExists);
-    $s->bindValue(':pass', $passwordExists);
-    $s->execute();
-    }
-    catch(PDOException $e)
-    {
-     $error = 'Помилка при пошуку автора';
-     include 'errors/error.html.php';
-     exit();
-   }
-     $row = $s->fetch();
-   if ($row[0] > '0')
-   {
-   	// echo " more then null ";
-    return TRUE;
-   }
-   else
-   {
-   	// echo ' less then hull ';
-    return FALSE;
-   }
-  
-
-}   
-//links 
+// Файл з шляхами 
 include $_SERVER['DOCUMENT_ROOT'].'/root/links/links.php';
-// /links
-//////////////////////////////
+// Файл з шляхами
+
+// Функції для авторизації та визначення прав користувача
+include "$functions"."authentificationAndRules.func.php";
+// Функції для авторизації та визначення прав користувача
 
 //Вибираємо всі  теми з бази даних
 include '/root/controllers/dbConnections/db.inc.php';
@@ -292,7 +200,7 @@ if (isset($_POST['action']) and  $_POST['action'] == 'load' ){
 
 // Записуємо нові теми в таблицю тем
 if (isset($_POST['themesNames']) and $_POST['themesNames'] == 'ВІДКРИТИ ТЕМУ'){
-include 'db.inc.php';
+include "$sfs";
 				try{
 			$sqlInsertThemesName = 'INSERT INTO themes SET
 				themesName          = :themesName';
@@ -318,7 +226,7 @@ include 'db.inc.php';
 
 // Вибір ідентифікатора існуючої теми
 if (isset($_POST['headesrForThemes']) and $_POST['headesrForThemes'] !==  'ВІДКРИТИ ТЕМУ' and $_POST['headesrForThemes'] !==  '') {
-include 'db.inc.php';
+include "$sfs";
 
 try {
 			$sqlThemesIds = 'SELECT id FROM themes WHERE
@@ -368,155 +276,11 @@ else{
 // /Записуємо нові заголовки в таблицю заголовків
 
 //////////////////////////////
-
-	class filesaver{
-	public $username;
-	public $name;
-	public $selectName;
-	public $oldNameSwitch;
-	public $newNameSwitch;
-	public $nameForUpdate;
-	public $type; 
-	public $size; 
-	public $tmp_name;
-	public $error;
-	public $comments;
-	public $themesId;
-	public $resivedHeadersId;
-	public $curentUserId;
-	
-	public function collector(){
-		//icons розширення файлів зображень
-		if (preg_match('/^(image)+\/+(jpe?g)+$/i', $this->type )){
-		$extension = ".jpeg";
-		$targetDir = 'icons/';
-		}
-
-		if (preg_match('/^(image)+\/+(gif)+$/i', $this->type )){
-		$extension = ".gif";
-		$targetDir = 'icons/';
-		}
-
-		if (preg_match('/^(image)+\/+(png)+$/i', $this->type )){
-		$extension = ".png";
-		$targetDir = 'icons/';
-		}
-
-		//videos розширення файлів відео (тільки mp4)
-		if (preg_match('/^(video)+\/+(mp4|MP4)+$/i', $this->type )){
-		$extension = ".mp4";
-		$targetDir = 'videos/';
-		}
-
-		//audios розширення файлів аудіо
-		if (preg_match('/^(audio)+\/+(mp3)+$/i', $this->type )){
-		$extension = ".mp3";
-		$targetDir = 'audios/';
-		}
-		if (preg_match('/^(audio)+\/+(wav|x-wav)+$/i', $this->type )){
-		$extension = ".wav";
-		$targetDir = 'audios/';
-		}
-
-		$root = "root/UsersData/";
-		$username = "$this->username"."/";
-		$originalFileName = "$this->name";
-		$tmp_name = $this->tmp_name;
-		$pathToDir =  "$root$username$targetDir";
-		$curDateTime = date('YMd_H-i-s');
-		$dateForDb = date('d:m:y H:i');
-		$ip ="_". $_SERVER['REMOTE_ADDR'];
-		$fileNaming = "$curDateTime$ip$extension";
-
-		if (isset($this->selectName) and $this->selectName == $this->newNameSwitch){
-
-			$fileNamingForDb = "$this->nameForUpdate$extension";
-		}
-		elseif(isset($this->selectName) and $this->selectName == $this->oldNameSwitch){
-			$fileNamingForDb = "$originalFileName";
-		}
-
-		//шлях для зберігання файлів записаний у вигляді змінних		
-		$pathToFile = "$pathToDir$fileNaming";
-
-// перевірка розширень файлів jpeg, gif, png, mp4, mp3, wav
-		if (preg_match('/^[a-zA-Z]+\/+(jpe?g|gif|png|mpeg|mp4|mp3|mpeg3|x-mpeg-3|mpeg|x-mpeg|wav|x-wav|wave)+$/i', $this->type)){
-
-// Записуємо файл у каталог на сервері під унікальним іменем
-		$savingFile = move_uploaded_file($tmp_name, $pathToFile);
-
-		if (isset($savingFile)){
-		echo 'Файл збережено успішно!<br>';
+//////////////////////////////////////////////////////opopopopop/
+include "objects"."NewFilesaver.fsaver.obj.php";	
 
 
-// вносим дані про забережений файл до таблиці бази даних
-		include 'db.inc.php';
-		try{
-				$sql = 'INSERT INTO links SET
-					pathToDir        = :pathToDir,
-					fileNaming       = :fileNaming,
-					fileNamingForDb  = :fileNamingForDb,
-					mimeType         = :mimeType,
-					comments         = :comments,
-					fileUPDate       = :fileUPDate,
-					userId           = :userId,
-					headersId        = :headersId,
-					themesId         = :themesId';
-					$s = $pdo->prepare($sql);
-					$s -> bindValue(':pathToDir',       $pathToDir);
-					$s -> bindValue(':fileNaming',      $fileNaming);
-					$s -> bindValue(':fileNamingForDb', $fileNamingForDb);
-					$s -> bindValue(':mimeType',        $this->type);
-					$s -> bindValue(':comments',        $this->comments);
-					$s -> bindValue(':fileUPDate',      $dateForDb);
-					$s -> bindValue(':userId',          $this->curentUserId);
-					$s -> bindValue(':headersId',       $this->resivedHeadersId);
-					$s -> bindValue(':themesId',        $this->themesId);
-					$s -> execute();
-				}
-			catch (PDOException $e) {
-				$error = 'Помилка додавання в бд.'. $e->getMessage();
-				include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';
-				exit();	
-				}
-		}
-		else{ 
-		$error = 'Помилка при зберіганні файлу';
-		include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';
-		exit();
-		}
-		}
 
-		else{
-			$error = 'Завантажте файл jpeg, gif, png, mp4, mp3, wav формату! ';
-			include $_SERVER['DOCUMENT_ROOT']. '/sfs/error.html.php';
-			exit();
-
-		}
-	}
-
-}
-
-
-	$fsaver = new filesaver;
-	$fsaver->username            = $_SESSION['usernameExists'];
-	$fsaver->name                = $_FILES['upload']['name'];
-	$fsaver->oldNameSwitch       = 'oldNameSwitch';
-	$fsaver->newNameSwitch       = 'newNameSwitch';
-	$fsaver->selectName          = $_POST['selectName'];
-	$fsaver->nameForUpdate       = $_POST['nameForUpdate'];
-	$fsaver->type                = $_FILES['upload']['type'];
-	$fsaver->size                = $_FILES['upload']['size'];
-	$fsaver->tmp_name            = $_FILES['upload']['tmp_name'];
-	$fsaver->error               = $_FILES['upload']['error'];
-	$fsaver->comments            = $_POST['comments'];
-	$fsaver->themesId            = $themesId;	
-	$fsaver->resivedHeadersId    = $resivedHeadersId;
-	$fsaver->curentUserId        = $curentUserId;
-	$fsaver->collector();
-	
-	 header('Location: . ' ) ;
-	 exit();	
 }
 
 /////////////////////////////
@@ -575,7 +339,7 @@ if (isset($_GET['remove']) and $_GET['remove'] =='removePublication' ) {
 // /Видалення файлів з каталогів
 
 // Видалення записів про файли з бази даних
-include 'db.inc.php';
+include "$sfs";
 try
 {
 	$sql = 'DELETE FROM links WHERE id = :id';
@@ -638,7 +402,7 @@ if (isset($_POST['regNewUser']) and $_POST['regNewUser'] == 'registration'
 
 // Показуємо форму авторизації
  if(isset($_GET['authorization'])){
- include 'faces/forms/authentificationForm.html.php';
+ include "$forms"."authentificationForm.html.php";
 }
 // /Показуємо форму авторизації 
 
