@@ -147,6 +147,8 @@ echo htmlspecialchars($header['headersNames'], ENT_QUOTES, 'utf-8');?>
 <?php foreach ($medias as $media):?>
 
 <div class="generalBlock">
+	
+	<!-- Блок реквізитів публікації -->
 	<div class="headBlock">
 	
 	<div class="headersOfPublications">
@@ -178,30 +180,48 @@ echo htmlspecialchars($header['headersNames'], ENT_QUOTES, 'utf-8');?>
 		<?php echo htmlspecialchars($media['fileUpDate'], ENT_QUOTES, 'utf-8');?>
 	</div>
 
+
 <!--Тема публікації-->
-
-	<div class="themaBlock">
-тема:
-<?php 
-foreach ($themes as $theme) {
- $theme['id'];
- $theme['themesName'];
- if ($media['themesId'] == $theme['id']){
- echo htmlspecialchars($theme['themesName'], ENT_QUOTES, 'utf-8');
-}
-}
-?>
+<div class="themaBlock">
+	тема:
+	<?php
+	foreach ($themes as $theme) {
+ 		$theme['id'];
+ 		$theme['themesName'];
+ 			if ($media['themesId'] == $theme['id']){
+ 			echo htmlspecialchars($theme['themesName'], ENT_QUOTES, 'utf-8');
+ 			}
+	}?>
 </div>
-<!-- Редагування публікації-->
-	<div class="operationBlock">
-		<a href="?editMediaForm">Редагувати</a>  
-	</div>
-	
-	</div>
+<!--/Тема публікації-->
 
-	<div class="mediaDataBlock">
+
+
+
+
+
+<!-- Редагування та оцінювання публікації-->
+	<div class="operationBlock">
+	<?php if ($_SESSION['usernameExists'] == $user['login']):?>
+			
+			<a href="?editMediaForm">Редагувати</a>  
+<?php else:?>
+	<?php echo $user['login'].$_SESSION['usernameExists'];?>
+	оцінювання
+<?php endif;?>
+	</div>
+<!-- /Редагування та оцінювання публікації-->
 		
-<?php
+
+
+
+
+
+		</div>
+<!-- /Блок реквізитів публікації -->	
+<!-- Блок виведення зображень відео та фото -->
+	<div class="mediaDataBlock">
+		<?php
 		switch ($media['mimeType']) {
 		    case 'audio/mp3':?>
 		    <audio controls>
@@ -261,6 +281,8 @@ foreach ($themes as $theme) {
 }?>
 
 	</div>
+	<!-- /Блок виведення зображень відео та фото -->
+	
 	<div class="commentsBlock">
 		<?php echo htmlspecialchars($media['comments'], ENT_QUOTES, 'utf-8');?>
 	</div>
