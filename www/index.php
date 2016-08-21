@@ -7,6 +7,8 @@ include $_SERVER['DOCUMENT_ROOT'].'/root/links/links.php';
 include "$functions"."authentificationAndRules.func.php";
 // Функції для авторизації та визначення прав користувача
 
+echo $errorMessage;
+  
 //Вибираємо всі  теми з бази даних
 include '/root/controllers/dbConnections/db.inc.php';
 try {
