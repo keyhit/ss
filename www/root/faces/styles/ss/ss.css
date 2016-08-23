@@ -471,6 +471,21 @@ text-decoration: none
 	width: 590;
 	margin: auto;
 }
+.ratingsBlock{
+	background-color: lightyellow;
+	width: 590px;
+	height:30px;
+	margin: auto;
+}
+.RatingForm{
+	width: 220px;
+}
+.ratingDescriber{
+	width: 250px;
+	margin-top: -30px;
+	float: right;
+	font-size: 14px;
+}
 
 /*блок користувачів*/
 .usersListBlock{
@@ -542,18 +557,3 @@ float: right;
 margin-top: -25px;	
 }
 
-legend{
-	margin: auto;
-	background-color: lightgreen;
-}
-label{
-		margin: auto;
-	background-color: lightgreen;
-}
-/*низ сайту*/
-/*.footer{
-width: 900px;
-background-color: green;
-position: absolute;
-margin-bottom: 0px;
-}*/

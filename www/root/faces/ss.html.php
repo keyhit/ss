@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -195,29 +196,12 @@ echo htmlspecialchars($header['headersNames'], ENT_QUOTES, 'utf-8');?>
 </div>
 <!--/Тема публікації-->
 
-
-
-
-
-
 <!-- Редагування та оцінювання публікації-->
 	<div class="operationBlock">
-	<?php if ($_SESSION['usernameExists'] == $user['login']):?>
-			
-			<a href="?editMediaForm">Редагувати</a>  
-<?php else:?>
-	<?php echo $user['login'].$_SESSION['usernameExists'];?>
-	оцінювання
-<?php endif;?>
+		<?php	include "$templates"."ssEditor.html.php"; ?>
 	</div>
 <!-- /Редагування та оцінювання публікації-->
-		
-
-
-
-
-
-		</div>
+</div>
 <!-- /Блок реквізитів публікації -->	
 <!-- Блок виведення зображень відео та фото -->
 	<div class="mediaDataBlock">
@@ -283,9 +267,18 @@ echo htmlspecialchars($header['headersNames'], ENT_QUOTES, 'utf-8');?>
 	</div>
 	<!-- /Блок виведення зображень відео та фото -->
 	
+<!-- Текстова новина або коментар до фото-->
 	<div class="commentsBlock">
 		<?php echo htmlspecialchars($media['comments'], ENT_QUOTES, 'utf-8');?>
 	</div>
+<!-- /Текстова новина або коментар до фото  -->
+
+<!-- Рейтинг та оцінка публікації -->
+	<div class="ratingsBlock">
+		<?php include "$templates"."rating.html.php"; ?>
+	</div>
+<!-- /Рейтинг та оцінка публікації -->
+
 </div>
 <?php endforeach; ?>
 <?php else: ?>
@@ -294,51 +287,16 @@ echo htmlspecialchars($header['headersNames'], ENT_QUOTES, 'utf-8');?>
 	<?php endif; ?>
 </div>
 
+
+
+<!-- Блок списку зареэстрованих користувачів -->
 <div class="usersListBlock">
-
-<?php if(!isset($users)):?>
-<?echo htmlspecialchars('Користувачі відсутні', ENT_QUOTES, 'utf-8');?>
-<? else:?>
-<? foreach($users as $user):?>
-
-<!--  -->
-<div class="usersButton">
-<!--  -->
-<div class="userLogoIcon">
-<a class="linksForUserLogoIcon" href="?selectByLogin=<?php echo htmlspecialchars($user['id'], ENT_QUOTES, 'utf-8');?>">
-<img src="<?php
-echo htmlspecialchars($user['userLogoIcon'], ENT_QUOTES, 'utf-8');?>">
-</a>
+<?php include "$templates"."usersList.html.php"; ?>
 </div>
-<!--  -->
+<!-- /Блок списку зареэстрованих користувачів -->
 
-<div class="login">
-<a class="linksForUserLogin" href="?selectByLogin=<?php echo htmlspecialchars($user['id'], ENT_QUOTES, 'utf-8');?>">
-<?php echo htmlspecialchars($user['login'], ENT_QUOTES, 'utf-8');?>
-</a>
-</div>
-<!--  -->
-<div class="status">
-<a class="linksForUserStatus" href="?selectByLogin=<?php echo htmlspecialchars($user['id'], ENT_QUOTES, 'utf-8');?>">
-<?php echo htmlspecialchars($user['status'], ENT_QUOTES, 'utf-8');?>
-</a>
 </div>
 </div>
-
-
-<?php endforeach;?>
-<?php endif;?>
-</div>
-
-</div>
-
-<!-- <div class="footer">
-    Ra-ta-ta-ta
-</div> -->
-
-</div>
-
-
 </body>
 </html> 
 

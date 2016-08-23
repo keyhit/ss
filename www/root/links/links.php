@@ -20,10 +20,20 @@ $classesDir					= $_SERVER['DOCUMENT_ROOT']."/root/controllers/classes/";
 $objectsDir					= $_SERVER['DOCUMENT_ROOT']."/root/controllers/objects/";
 // CLASSES - OBGECTS //
 
-// FORMS //
-$forms = $_SERVER['DOCUMENT_ROOT'].'/root/faces/forms/';
-// FORMS //
+
 
 // FUNCTIONS //
 $functions = $_SERVER['DOCUMENT_ROOT']."/root/controllers/functions/";
 // FUNCTIONS //
+
+/// - FASES - ///
+
+// TEMPLATES //
+$templates = $_SERVER['DOCUMENT_ROOT'].'/root/faces/templates/';
+// TEMPLATES //
+
+// FORMS //
+$forms = $_SERVER['DOCUMENT_ROOT'].'/root/faces/forms/';
+// FORMS //
+
+/// - FASES - ///

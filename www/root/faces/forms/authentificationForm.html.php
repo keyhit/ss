@@ -20,7 +20,7 @@
 			<label for="sExists">Пароль</label>
 		</div>
 		<div >
-			<input type="text" name="passwordExists" id="sExists">
+			<input type="password" name="passwordExists" id="sExists">
 		</div>
 		<div>
 			<input type="hidden" name="authentification" value="logInUser">
