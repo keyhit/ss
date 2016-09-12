@@ -1,9 +1,6 @@
+цукцу
 <?php 
  
- 
-
-
-
 
 // Файл з шляхами 
 include $_SERVER['DOCUMENT_ROOT'].'/root/links/links.php';
